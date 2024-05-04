@@ -1,14 +1,17 @@
 extends Area2D
 
 signal hit
+signal health_changed(old_value, new_value)
+signal enemy_left
+
 @export var speed = 400
 var screen_size
+var health = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
 	hide()
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -33,14 +36,21 @@ func _process(delta):
 		$AnimatedSprite2D.flip_v = false
 		$AnimatedSprite2D.flip_h = velocity.x < 0
 	
-		
+func take_damage(amount):
+	var old_health = health
+	health -= amount
+	health_changed.emit(old_health, health)
 
 func _on_body_entered(body):
-	hide()
 	hit.emit()
-	$CollisionShape2D.set_deferred("disabled", true)
+	take_damage(10)
+	#$CollisionShape2D.set_deferred("disabled", true)
 	
 func start(pos):
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
+
+
+func _on_body_exited(body):
+	enemy_left.emit()

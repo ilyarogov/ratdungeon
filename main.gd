@@ -7,11 +7,9 @@ var score
 func _ready():
 	new_game()
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-
 
 func game_over():
 	$ScoreTimer.stop()
@@ -35,3 +33,14 @@ func _on_start_timer_timeout():
 	$MobTimer.start()
 	$ScoreTimer.start()
 	$enemy.startFollow()
+
+
+func _on_player_hit():
+	$HUD.show_message("Player hit")
+	$enemy.attack()
+
+
+func _on_player_health_changed(old_value, new_value):
+	pass
+
+

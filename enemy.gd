@@ -21,3 +21,6 @@ func _on_timer_timeout():
 	
 func startFollow():
 	$Timer.start()
+	
+func attack():
+	$AnimatedSprite2D.animation = 'attack'

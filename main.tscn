@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://diw41im02bvpq"]
+[gd_scene load_steps=11 format=3 uid="uid://diw41im02bvpq"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_42eve"]
 [ext_resource type="PackedScene" uid="uid://cl7kyqieyal77" path="res://node_2d.tscn" id="1_vjq0y"]
@@ -10343,9 +10343,6 @@ texture_region_size = Vector2i(32, 32)
 84:95/0 = 0
 85:95/0 = 0
 
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ldcp4"]
-resource_name = "my_ground"
-
 [sub_resource type="TileSet" id="TileSet_k34mj"]
 tile_size = Vector2i(32, 32)
 terrain_set_0/mode = 0
@@ -10355,7 +10352,6 @@ terrain_set_0/terrain_1/name = "Terrain 1"
 terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_m3fcp")
-sources/1 = SubResource("TileSetScenesCollectionSource_ldcp4")
 
 [node name="Main" type="Node"]
 script = ExtResource("1_42eve")
@@ -10389,7 +10385,8 @@ position = Vector2(240, 540)
 position = Vector2(792, 464)
 player = NodePath("../Player")
 
-[connection signal="hit" from="Player" to="." method="game_over"]
+[connection signal="health_changed" from="Player" to="." method="_on_player_health_changed"]
+[connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

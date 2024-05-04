@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdg3ah8y4fcug"]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_cvp46"]
+[ext_resource type="FontFile" uid="uid://cwax3bpt1te2o" path="res://OldLondon.ttf" id="2_w7gjm"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_cvp46")
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -13.5
+offset_right = 13.5
+offset_bottom = 52.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_w7gjm")
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Message" type="Label" parent="."]
+offset_right = 342.0
+offset_bottom = 52.0
+theme_override_fonts/font = ExtResource("2_w7gjm")
+theme_override_font_sizes/font_size = 30
+text = "Dodge the rats"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_w7gjm")
+theme_override_font_sizes/font_size = 64
+text = "Start"
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

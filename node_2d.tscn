@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://cl7kyqieyal77"]
+
+[ext_resource type="Texture2D" uid="uid://c8bpyhl58tvqf" path="res://Spritesheet 128/Knight_1/Walk.png" id="1_d2637"]
+[ext_resource type="Script" path="res://Player.gd" id="1_q378w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h00yy"]
+atlas = ExtResource("1_d2637")
+region = Rect2(100, 60, 128, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tveqx"]
+atlas = ExtResource("1_d2637")
+region = Rect2(228, 60, 128, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kk5n5"]
+atlas = ExtResource("1_d2637")
+region = Rect2(356, 60, 128, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxk0d"]
+atlas = ExtResource("1_d2637")
+region = Rect2(484, 60, 128, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_to51c"]
+atlas = ExtResource("1_d2637")
+region = Rect2(612, 60, 128, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwph2"]
+atlas = ExtResource("1_d2637")
+region = Rect2(740, 60, 128, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rj1c"]
+atlas = ExtResource("1_d2637")
+region = Rect2(868, 60, 128, 68)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jgq14"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h00yy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tveqx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kk5n5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kxk0d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_to51c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwph2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4rj1c")
+}],
+"loop": false,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5jjvy"]
+
+[node name="Player" type="Area2D"]
+position = Vector2(289, 140)
+script = ExtResource("1_q378w")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(31, 1)
+scale = Vector2(1.148, 1)
+sprite_frames = SubResource("SpriteFrames_jgq14")
+animation = &"walk"
+speed_scale = 1.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(29, 5)
+scale = Vector2(2.5, 2.5)
+shape = SubResource("CapsuleShape2D_5jjvy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
